@@ -1,30 +1,202 @@
 # generator-blog [![Build Status](https://secure.travis-ci.org/danielabar/generator-blog.png?branch=master)](https://travis-ci.org/danielabar/generator-blog)
 
-> [Yeoman](http://yeoman.io) generator
-
-Learning Yeoman with TutsPlus course [Say Yo to Yeoman](https://courses.tutsplus.com/courses/say-yo-to-yeoman)
+> Learning [Yeoman](http://yeoman.io) with TutsPlus course [Say Yo to Yeoman](https://courses.tutsplus.com/courses/say-yo-to-yeoman)
 
 This is a sample generator built from this [lesson](https://courses.tutsplus.com/courses/say-yo-to-yeoman/lessons/generators)
 
-## Getting Started
+_Replace 'blog' with actual name of your generator_
 
-If you don't already have it, install yeoman
+## Install generator
 
-```bash
-$ npm install -g yo
-```
+  ```bash
+  sudo npm install -g generator-generator
+  cd projects
+  mkdir generator-blog && cd $_
+  yo generator
+  ```
 
-### Yeoman Generators
+Open the project in your text editor of choice.
 
-To install generator-blog locally from this project, cd to root project directory and run
+`app/index.js` is the main definition of the generator
 
-```bash
-$ npm link
-```
+* `askFor` will iterate over each prompt in the prompts section
+* `app` creates directories and copies files into them -> this builds up the desired app
+* `projectFiles` copies over project specific config files like .editorconfit and .jshintrc
 
-Now you're ready to use the generator to scaffold a new blog application
+## Make the generator available locally (since its not published anywhere yet)
 
-```bash
-$ mkdir myblogproj && cd $_
-$ yo blog
-```
+  ```bash
+  cd projects/generator-blog
+  sudo npm link
+  ```
+
+This will symlink project dir to global npm modules, for example:
+
+  ```
+  /usr/local/lib/node_modules/generator-blog -> /Users/dbaron/projects/generator-blog
+  ```
+
+## Create a project using this generator
+
+  ```bash
+  cd projects
+  mkdir generator-blog-test
+  ```
+
+## Developing the generator
+
+### Prompts
+
+Prompts is an array of objects like this:
+
+  ```javascript
+  {
+  type: 'confirm',
+  name: 'wantsMarkdown',   // value becomes variable name to control behaviour
+  message: 'Would you like to use Markdown?', // displayed to user
+  default: true // default value if user just hits enter rather than making explicit selection
+  }
+  ```
+
+Handle all the prompt results in the prompt method:
+
+  ```javascript
+  this.prompt(prompts, function (props) {
+  this.someOption = props.someOption;
+  // put your custom handling code here, for example
+  this.wantsMarkdown = props.wantsMarkdown;     // make the option available to scope of ENTIRE generator
+  done();
+  }.bind(this));
+  ```
+
+### App
+
+To create a new directory:
+
+  ```javascript
+  app: function () {
+  this.mkdir('posts');
+  }
+  ```
+
+Instead of simply copying package.json:
+
+  ```javascript
+  this.copy('_package.json', 'package.json');
+  ```
+
+Use template function to take advantage of templating and options from user prompts
+
+  ```javascript
+  this.template('_package.json', 'package.json');
+  ```
+
+Edit `app/templates/_package.json` that comes with the generator, for example:
+
+  ```
+  "name": "blog",
+  "version": "0.0.1",
+  "dependencies" {
+       "ejs": "*"
+      <% if (wantsMarkdown) { %>
+      , "showdown" : "*"
+      <% } %>
+  }
+  ```
+
+NOReplace 'blog' with actual name of your generator
+
+Install generator
+sudo npm install -g generator-generator
+cd projects
+mkdir generator-blog && cd $_
+yo generator
+     answer the prompts
+
+Open the project
+sublime .
+app/index.js is the main definition of the generator
+     askFor will iterate over each prompt in the prompts section
+     app creates directories and copies files into them -> this builds up the desired app
+     projectFiles copies over project specific config files like .editorconfit and .jshintrc
+
+Make the generator available locally (since its not published anywhere yet)
+cd projects/generator-blog
+sudo npm link
+    this will symlink project dir to global npm modules, for example:
+    /usr/local/lib/node_modules/generator-blog -> /Users/dbaron/projects/generator-blog
+
+Create a project using this generator
+cd projects
+mkdir generator-blog-test
+
+Working on the generator: Prompts
+Each prompt looks like this:
+{
+type: 'confirm',
+name: 'wantsMarkdown',   // value becomes variable name to control behaviour
+message: 'Would you like to use Markdown?', // displayed to user
+default: true // default value if user just hits enter rather than making explicit selection
+}
+
+Handle all the prompt results in the prompt method:
+this.prompt(prompts, function (props) {
+    this.someOption = props.someOption;
+     // put your custom handling code here, for example
+     this.wantsMarkdown = props.wantsMarkdown;     // make the option available to scope of ENTIRE generator
+    done();
+}.bind(this));
+
+Working on the generator: App
+To create a new directory:
+app: function () {
+    this.mkdir('posts');
+}
+
+Instead of simply copying package.json:
+this.copy('_package.json', 'package.json');
+
+Use template function to take advantage of templating and options from user prompts:
+this.template('_package.json', 'package.json');
+
+Edit app/templates/_package.json that comes with the generator, for example:
+"name": "blog",
+"version": "0.0.1",
+"dependencies" {
+     "ejs": "*"
+    <% if (wantsMarkdown) { %>
+    , "showdown" : "*"
+    <% } %>
+}
+
+_JavaScript code can be embedded in between tags <% %>_
+
+Place comma before optional dep, so json file isn't broken whether user wants the option or not
+
+### Create a new template
+ejs is a templating system used by node js
+
+  ```javascript
+  this.copy('index.ejs', 'app/index.html');
+  ```
+
+Create index.ejs file in `app/templates`
+
+  ```html
+  <html>
+    <head>
+      <style>
+          body {
+            border-top: 5px solid #000;
+            color: #444;
+            font-family: sans-serif;
+          }
+      </style>
+    </head>
+    <body>
+      <div id="container">
+          <% content %>
+      </div>
+    </body>
+  </html>
+  ```
