@@ -8,7 +8,7 @@ This is a sample generator built from this [lesson](https://courses.tutsplus.com
 
 ## Getting Started
 
-If you don't already have it, install yeoman:
+If you don't already have it, install yeoman
 
 ```bash
 $ npm install -g yo
@@ -22,7 +22,7 @@ To install generator-blog locally from this project, cd to root project director
 $ npm link
 ```
 
-Now you're ready to use the generator to scaffold a new blog application:
+Now you're ready to use the generator to scaffold a new blog application
 
 ```bash
 $ mkdr myblogproj && cd $_
