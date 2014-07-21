@@ -134,6 +134,6 @@ This step is required since its not published on npm yet.
 
   ```bash
   cd projects
-  mkdir generator-blog-test
+  mkdir generator-blog-test && cd $_
   yo blog
   ```
