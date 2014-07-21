@@ -25,6 +25,6 @@ $ npm link
 Now you're ready to use the generator to scaffold a new blog application
 
 ```bash
-$ mkdr myblogproj && cd $_
+$ mkdir myblogproj && cd $_
 $ yo blog
 ```
