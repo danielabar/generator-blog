@@ -4,8 +4,6 @@
 
 This is a sample generator built from this [lesson](https://courses.tutsplus.com/courses/say-yo-to-yeoman/lessons/generators)
 
-_Replace 'blog' with actual name of your generator_
-
 ## Install generator
 
   ```bash
@@ -23,24 +21,11 @@ Open the project in your text editor of choice.
 * `app` creates directories and copies files into them -> this builds up the desired app
 * `projectFiles` copies over project specific config files like .editorconfit and .jshintrc
 
-## Make the generator available locally (since its not published anywhere yet)
-
-  ```bash
-  cd projects/generator-blog
-  sudo npm link
-  ```
 
 This will symlink project dir to global npm modules, for example:
 
   ```
   /usr/local/lib/node_modules/generator-blog -> /Users/dbaron/projects/generator-blog
-  ```
-
-## Create a project using this generator
-
-  ```bash
-  cd projects
-  mkdir generator-blog-test
   ```
 
 ## Developing the generator
@@ -75,7 +60,7 @@ To create a new directory:
 
   ```javascript
   app: function () {
-  this.mkdir('posts');
+    this.mkdir('posts');
   }
   ```
 
@@ -103,71 +88,6 @@ Edit `app/templates/_package.json` that comes with the generator, for example:
       <% } %>
   }
   ```
-
-NOReplace 'blog' with actual name of your generator
-
-Install generator
-sudo npm install -g generator-generator
-cd projects
-mkdir generator-blog && cd $_
-yo generator
-     answer the prompts
-
-Open the project
-sublime .
-app/index.js is the main definition of the generator
-     askFor will iterate over each prompt in the prompts section
-     app creates directories and copies files into them -> this builds up the desired app
-     projectFiles copies over project specific config files like .editorconfit and .jshintrc
-
-Make the generator available locally (since its not published anywhere yet)
-cd projects/generator-blog
-sudo npm link
-    this will symlink project dir to global npm modules, for example:
-    /usr/local/lib/node_modules/generator-blog -> /Users/dbaron/projects/generator-blog
-
-Create a project using this generator
-cd projects
-mkdir generator-blog-test
-
-Working on the generator: Prompts
-Each prompt looks like this:
-{
-type: 'confirm',
-name: 'wantsMarkdown',   // value becomes variable name to control behaviour
-message: 'Would you like to use Markdown?', // displayed to user
-default: true // default value if user just hits enter rather than making explicit selection
-}
-
-Handle all the prompt results in the prompt method:
-this.prompt(prompts, function (props) {
-    this.someOption = props.someOption;
-     // put your custom handling code here, for example
-     this.wantsMarkdown = props.wantsMarkdown;     // make the option available to scope of ENTIRE generator
-    done();
-}.bind(this));
-
-Working on the generator: App
-To create a new directory:
-app: function () {
-    this.mkdir('posts');
-}
-
-Instead of simply copying package.json:
-this.copy('_package.json', 'package.json');
-
-Use template function to take advantage of templating and options from user prompts:
-this.template('_package.json', 'package.json');
-
-Edit app/templates/_package.json that comes with the generator, for example:
-"name": "blog",
-"version": "0.0.1",
-"dependencies" {
-     "ejs": "*"
-    <% if (wantsMarkdown) { %>
-    , "showdown" : "*"
-    <% } %>
-}
 
 _JavaScript code can be embedded in between tags <% %>_
 
@@ -199,4 +119,20 @@ Create index.ejs file in `app/templates`
       </div>
     </body>
   </html>
+  ```
+
+## Make the generator available locally
+
+This step is required since its not published on npm yet.
+
+  ```bash
+  cd projects/generator-blog
+  sudo npm link
+  ```
+
+## Create a project using this generator
+
+  ```bash
+  cd projects
+  mkdir generator-blog-test
   ```
