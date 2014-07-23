@@ -30,11 +30,12 @@ BlogRenderer.prototype = {
 
   _template: function(html) {
     var template = this.grunt.file.read(this.template);
-    // FIXME Do not escape html
+    // ISSUE How to make EJS NOT escape the HTML?
     return EJS.render(template, {content: html});   // recall index.ejs has: <%= content %>
   },
 
   _write: function(page) {
+    // ISSUE markdown posts with .md extension should be written as .html in dist dir
     this.grunt.file.write(path.join(this.destination, this.file), page);
   }
 };

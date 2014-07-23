@@ -23,6 +23,7 @@ describe('blog generator', function () {
       'bower.json',
       'app/index.ejs',
       'posts/demo.html',
+      'posts/welcome.md',
       '.jshintrc',
       '.editorconfig'
     ];
@@ -33,6 +34,7 @@ describe('blog generator', function () {
     this.app.options['skip-install'] = true;
     this.app.run({}, function () {
       helpers.assertFile(expected);
+      helpers.assertFileContent('package.json', /grunt/)
       helpers.assertFileContent('package.json', /ejs/)
       helpers.assertFileContent('package.json', /showdown/)
       done();
@@ -55,6 +57,7 @@ describe('blog generator', function () {
     this.app.options['skip-install'] = true;
     this.app.run({}, function () {
       helpers.assertFile(expected);
+      helpers.assertFileContent('package.json', /grunt/)
       helpers.assertFileContent('package.json', /ejs/)
       helpers.assertNoFileContent('package.json', /showdown/)
       done();

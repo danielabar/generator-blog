@@ -45,7 +45,9 @@ var BlogGenerator = yeoman.generators.Base.extend({
     this.copy('_bower.json', 'bower.json');
     this.copy('index.ejs', 'app/index.ejs');
     this.copy('demo.html', 'posts/demo.html');
-    // TODO: If user wants markdown, create a sample post in markdown
+    if (this.wantsMarkdown) {
+      this.copy('welcome.md', 'posts/welcome.md');
+    }
     this.copy('Gruntfile.js', 'Gruntfile.js');
   },
 
