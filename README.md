@@ -121,6 +121,14 @@ Create index.ejs file in `app/templates`
   </html>
   ```
 
+## Make a Gruntfile
+
+  ```javascript
+  this.copy('Gruntfile.js', 'Gruntfile.js');
+  ```
+
+Create `Gruntfile.js` in `app/templates` and create build tasks as appropriate for the generated project.
+
 ## Make the generator available locally
 
 This step is required since its not published on npm yet.

@@ -39,13 +39,14 @@ var BlogGenerator = yeoman.generators.Base.extend({
 
   app: function () {
     this.mkdir('app');
-    this.mkdir('app/templates');
     this.mkdir('posts');
 
     this.template('_package.json', 'package.json');
     this.copy('_bower.json', 'bower.json');
-    this.copy('index.ejs', 'app/index.html');
-    this.copy('demo.html', 'posts/index.html');
+    this.copy('index.ejs', 'app/index.ejs');
+    this.copy('demo.html', 'posts/demo.html');
+    // TODO: If user wants markdown, create a sample post in markdown
+    this.copy('Gruntfile.js', 'Gruntfile.js');
   },
 
   projectfiles: function () {

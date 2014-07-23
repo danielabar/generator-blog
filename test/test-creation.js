@@ -21,8 +21,8 @@ describe('blog generator', function () {
     var expected = [
       'package.json',
       'bower.json',
-      'app/index.html',
-      'posts/index.html',
+      'app/index.ejs',
+      'posts/demo.html',
       '.jshintrc',
       '.editorconfig'
     ];
@@ -43,8 +43,8 @@ describe('blog generator', function () {
     var expected = [
       'package.json',
       'bower.json',
-      'app/index.html',
-      'posts/index.html',
+      'app/index.ejs',
+      'posts/demo.html',
       '.jshintrc',
       '.editorconfig'
     ];
