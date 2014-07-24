@@ -42,12 +42,23 @@ BlogRenderer.prototype = {
 
 module.exports = function(grunt) {
 
+
+  grunt.initConfig({
+    options: {
+      source: 'posts',
+      destination: 'dist'
+    }
+  });
+
   // TODO clean task to clean dist dir before each build
 
   grunt.registerTask('build', function() {
+    var pkg = grunt.file.readJSON('package.json');
+    console.log(pkg);
+
     var template = 'app/index.ejs';
-    var destination = path.join(process.cwd(), 'dist');
-    var source = path.join(process.cwd(), 'posts');
+    var destination = path.join(process.cwd(), grunt.config('options.destination'));
+    var source = path.join(process.cwd(), grunt.config('options.source'));
     var files = fs.readdirSync(source);
 
     files.forEach(function(file) {

@@ -129,6 +129,41 @@ Create index.ejs file in `app/templates`
 
 Create `Gruntfile.js` in `app/templates` and create build tasks as appropriate for the generated project.
 
+## Generator Options in Grunt
+
+Give user ability to customize some build options.
+For example, to make source and destination directories options
+
+  ```javascript
+  grunt.initConfig({
+    options: {
+      source: 'posts',
+      destination: 'dist'
+    }
+  });
+  ```
+Then replace the hard-coded line
+
+  ```javascript
+  var destination = path.join(process.cwd(), 'posts');
+  ```
+
+With
+
+  ```javascript
+  var destination = path.join(process.cwd(), grunt.config('options.destination'));
+  ```
+
+## Reference package.json in Gruntfile
+
+Sometimes there is a need to access package.json information directly from the project becuase a Grunt task needs it.
+
+To make the package.json information available to Grunt, add this line at beginning of Gruntfile.js
+
+  ```javascript
+  var pkg = grunt.file.readJSON('package.json');
+  ```
+
 ## Make the generator available locally
 
 This step is required since its not published on npm yet.
