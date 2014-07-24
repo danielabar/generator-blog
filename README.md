@@ -164,6 +164,20 @@ To make the package.json information available to Grunt, add this line at beginn
   var pkg = grunt.file.readJSON('package.json');
   ```
 
+## Subgenerators
+
+For example, to allow usage of generator such as
+
+  ```bash
+  yo blog:post
+  ```
+
+To make a subgenerator, execute this from the root of the generator project
+
+  ```bash
+  yo generator:subgenerator post
+  ```
+
 ## Make the generator available locally
 
 This step is required since its not published on npm yet.
