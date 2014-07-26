@@ -1,6 +1,6 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-- [generator-blog [![Build Status](https://secure.travis-ci.org/danielabar/generator-blog.png?branch=master)](https://travis-ci.org/danielabar/generator-blog)](#generator-blog-!build-statushttpssecuretravis-ciorgdanielabargenerator-blogpngbranch=masterhttpstravis-ciorgdanielabargenerator-blog)
+- [generator-blog](#generator-blog)
   - [Install generator](#install-generator)
   - [Developing the generator](#developing-the-generator)
     - [Prompts](#prompts)
