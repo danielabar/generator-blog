@@ -1,3 +1,21 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+- [generator-blog [![Build Status](https://secure.travis-ci.org/danielabar/generator-blog.png?branch=master)](https://travis-ci.org/danielabar/generator-blog)](#generator-blog-!build-statushttpssecuretravis-ciorgdanielabargenerator-blogpngbranch=masterhttpstravis-ciorgdanielabargenerator-blog)
+  - [Install generator](#install-generator)
+  - [Developing the generator](#developing-the-generator)
+    - [Prompts](#prompts)
+    - [App](#app)
+    - [Create a new template](#create-a-new-template)
+  - [Make a Gruntfile](#make-a-gruntfile)
+  - [Generator Options in Grunt](#generator-options-in-grunt)
+  - [Reference package.json in Gruntfile](#reference-packagejson-in-gruntfile)
+  - [Subgenerators](#subgenerators)
+  - [Run generator tests](#run-generator-tests)
+  - [Make the generator available locally](#make-the-generator-available-locally)
+  - [Create a project using this generator](#create-a-project-using-this-generator)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # generator-blog [![Build Status](https://secure.travis-ci.org/danielabar/generator-blog.png?branch=master)](https://travis-ci.org/danielabar/generator-blog)
 
 > Learning [Yeoman](http://yeoman.io) with TutsPlus course [Say Yo to Yeoman](https://courses.tutsplus.com/courses/say-yo-to-yeoman)
@@ -202,6 +220,26 @@ This means user must provide a name argument when invoking it, for example
 
   ```bash
   yo blog:post dummy
+  ```
+
+Store user options in _package.json so that they're available to subgenerators, for example
+
+  ```
+  "wantsMarkdown" : <%= wantsMarkdown  ? "true" : "false" %>,
+  ```
+
+Then it can be used in subgenerator index.js, for example
+
+  ```javascript
+    var pkg = JSON.parse(this.readFileAsString(path.join(process.cwd(), './package.json')));
+    if (pkg.wantsMarkdown === true) {
+      // do something...
+  ```
+
+## Run generator tests
+
+  ```bash
+  npm test
   ```
 
 ## Make the generator available locally
