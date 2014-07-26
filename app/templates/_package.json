@@ -1,10 +1,10 @@
 {
   "name": "blog",
   "version": "0.0.1",
-  "devDependencies": {
-    "grunt": "~0.4.1"
-  },
+  "wantsMarkdown" : <%= wantsMarkdown  ? "true" : "false" %>,
   "dependencies": {
+    "grunt": "~0.4.1",
+    "slug": "*",
     "ejs": "*"
     <% if (wantsMarkdown) { %>
     , "showdown": "*"

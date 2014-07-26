@@ -22,17 +22,23 @@ var PostGenerator = yeoman.generators.NamedBase.extend({
   files: function () {
     this.template(
       'post.' + this.extension(),
-      'posts/' + slug(this.name) + '.' + this.extension()
+      'posts/' + this.filename(this.name) + '.' + this.extension()
     );
   },
 
   extension: function() {
     var pkg = JSON.parse(this.readFileAsString(path.join(process.cwd(), './package.json')));
     if (pkg.wantsMarkdown === true) {
-      return 'markdown'
+      return 'md'
     } else {
       return 'html'
     }
+  },
+
+  filename: function(name) {
+    var date = new Date().getTime();
+    var slugifiedTitle = slug(name).toLowerCase();
+    return date + '-' + slugifiedTitle;
   }
 
 });

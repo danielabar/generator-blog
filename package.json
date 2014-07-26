@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "ejs": "^1.0.0",
+    "fs-extra": "^0.10.0",
     "mocha": "*",
     "showdown": "^0.3.1"
   },
