@@ -178,6 +178,32 @@ To make a subgenerator, execute this from the root of the generator project
   yo generator:subgenerator post
   ```
 
+This creates the following structure
+
+  ```
+  post
+  ├── index.js
+  └── templates
+      └── somefile.js
+  ```
+
+Main difference between regular and sub generator is scope.
+
+Subgenerator simply allows you to create a few files, folders.
+Does not ask you option questions like a regular generator can.
+
+Subgenerator index.js extends Yeoman `NamedBase`
+
+  ```javascript
+  var PostGenerator = yeoman.generators.NamedBase.extend({
+  ```
+
+This means user must provide a name argument when invoking it, for example
+
+  ```bash
+  yo blog:post dummy
+  ```
+
 ## Make the generator available locally
 
 This step is required since its not published on npm yet.
